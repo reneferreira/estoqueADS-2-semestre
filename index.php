@@ -1,144 +1,389 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Facil | Painel</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    <title>"Sistema de Controle de Estoque"</title>
+        :root {
+            --verde-escuro: #15251e;
+            --verde: #176b4d;
+            --verde-claro: #e6f3ed;
+            --fundo: #f4f7f5;
+            --branco: #ffffff;
+            --texto: #17221d;
+            --texto-claro: #68736d;
+            --borda: #dce3df;
+            --vermelho: #b33b36;
+        }
 
-
-        <style>
-        /* Estilos aplicados ao elemento body de toda a página */
         body {
-            margin: 0; /* Remove a margem padrão do navegador */
-            font-family: Arial, sans-serif; /* Define fonte padrão para o texto */
-            background-color: #f4f6f8; /* Define a cor de fundo da página */
-            color: #263238; /* Define a cor padrão do texto */
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--fundo);
+            color: var(--texto);
         }
 
-        /* Estilos para o cabeçalho da página */
-        header {
-            padding: 24px; /* Espaçamento interno ao redor do conteúdo do cabeçalho */
-            background-color: #1565c0; /* Cor de fundo azul do cabeçalho */
-            color: white; /* Cor do texto dentro do cabeçalho */
+        .pagina {
+            min-height: 100vh;
         }
 
-        /* Estilos para a área principal do conteúdo */
-        main {
-            max-width: 1000px; /* Limita a largura máxima do conteúdo */
-            margin: 30px auto; /* Centraliza horizontalmente e adiciona espaço acima/abaixo */
-            padding: 0 20px; /* Espaçamento interno nas laterais */
+        /* Conteudo principal */
+        .conteudo {
+            min-height: 100vh;
+            margin-left: 240px;
+            padding: 0 34px;
         }
 
-        /* Estilos para cada painel de informação */
-        .painel {
-            margin-bottom: 24px; /* Espaçamento abaixo do painel */
-            padding: 20px; /* Espaçamento interno do painel */
-            background-color: white; /* Cor de fundo branca do painel */
-            border-radius: 8px; /* Cantos arredondados do painel */
+        .cabecalho {
+            height: 96px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            border-bottom: 1px solid var(--borda);
         }
 
-        /* Estilos para o contêiner de resumo com cartões */
+        .cabecalho h1 {
+            margin: 3px 0 0;
+            font-size: 25px;
+        }
+
+        .saudacao {
+            color: var(--texto-claro);
+            font-size: 12px;
+        }
+
+        .usuario {
+            padding: 9px 12px;
+            border: 1px solid var(--borda);
+            border-radius: 6px;
+            background-color: var(--branco);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Cartoes de resumo */
         .resumo {
-            display: flex; /* Exibe os itens em linha usando flexbox */
-            gap: 16px; /* Espaçamento entre os cards */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 18px;
         }
 
-        /* Estilos para cada cartão dentro do resumo */
         .cartao {
-            flex: 1; /* Faz cada cartão ocupar espaço igual */
-            padding: 18px; /* Espaçamento interno do cartão */
-            background-color: #e3f2fd; /* Cor de fundo azul claro do cartão */
-            border-radius: 8px; /* Cantos arredondados do cartão */
+            padding: 20px;
+            border: 1px solid var(--borda);
+            border-top: 3px solid var(--verde);
+            border-radius: 7px;
+            background-color: var(--branco);
         }
 
-        /* Estilos para a tabela de produtos */
+        .cartao.alerta {
+            border-top-color: #b66a16;
+        }
+
+        .cartao span,
+        .cartao small {
+            display: block;
+            color: var(--texto-claro);
+        }
+
+        .cartao strong {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 25px;
+        }
+
+        .cartao small {
+            font-size: 11px;
+        }
+
+        /* Atalhos */
+        .atalhos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .atalho {
+            padding: 17px 20px;
+            border-radius: 7px;
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            text-decoration: none;
+        }
+
+        .atalho span {
+            display: block;
+            margin-top: 5px;
+            color: #a9b8b0;
+            font-size: 12px;
+        }
+
+        /* Paineis inferiores */
+        .grade-paineis {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 18px;
+        }
+
+        .painel {
+            overflow: hidden;
+            border: 1px solid var(--borda);
+            border-radius: 7px;
+            background-color: var(--branco);
+            box-shadow: 0 2px 10px rgba(23, 34, 29, 0.07);
+        }
+
+        .painel-titulo {
+            padding: 19px 20px;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .painel-titulo h2 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .painel-titulo p {
+            margin: 5px 0 0;
+            color: var(--texto-claro);
+            font-size: 12px;
+        }
+
+        .tabela-container {
+            overflow-x: auto;
+        }
+
         table {
-            width: 100%; /* Faz a tabela ocupar toda a largura disponível */
-            border-collapse: collapse; /* Remove espaçamento entre bordas de células */
+            width: 100%;
+            min-width: 620px;
+            border-collapse: collapse;
         }
 
-        /* Estilos comuns para cabeçalhos e células da tabela */
         th,
         td {
-            padding: 12px; /* Espaçamento interno das células */
-            border-bottom: 1px solid #dddddd; /* Linha inferior de separação entre linhas */
-            text-align: left; /* Alinha o texto à esquerda */
+            padding: 14px 18px;
+            border-bottom: 1px solid #edf0ee;
+            text-align: left;
         }
 
-        /* Estilos específicos apenas para os cabeçalhos da tabela */
         th {
-            background-color: #1565c0; /* Cor de fundo azul dos cabeçalhos */
-            color: white; /* Cor do texto dos cabeçalhos */
+            background-color: #fafbfa;
+            color: var(--texto-claro);
+            font-size: 11px;
+            text-transform: uppercase;
         }
 
-        /* Estilos para indicar itens com baixo estoque */
-        .baixo-estoque {
-            color: #c62828; /* Texto vermelho para destacar alerta */
-            font-weight: bold; /* Texto em negrito para maior destaque */
+        td small {
+            display: block;
+            margin-top: 4px;
+            color: var(--texto-claro);
+            font-size: 11px;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 4px;
+            background-color: var(--verde-claro);
+            color: var(--verde);
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .etiqueta.saida {
+            background-color: #f9e7e5;
+            color: #982f2b;
+        }
+
+        .lista-produtos {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .lista-produtos li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid #edf0ee;
+        }
+
+        .lista-produtos small {
+            display: block;
+            margin-top: 4px;
+            color: var(--texto-claro);
+        }
+
+        .lista-produtos b {
+            color: var(--vermelho);
+        }
+
+        .rodape {
+            padding: 36px 0 24px;
+            color: #8a948f;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* Ajustes para telas menores */
+        @media (max-width: 1000px) {
+            .resumo {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grade-paineis {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .conteudo {
+                margin-left: 0;
+                padding: 0 16px;
+            }
+
+            .resumo,
+            .atalhos {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
-
 </head>
 
 <body>
-    <header>
-        <h1>Sistema de Controle de Estoque</h1>
+    <div class="pagina">
+        
 
-        <p>
-            Usuário: Aluno |
-            Data: 4/8/2026|
-            Hora: 19:30
-        </p>
-    </header>
-
-    <main>
-        <section class="painel">
-            <h2>Resumo do estoque</h2>
-
-            <div class="resumo">
-                  <div class="cartao">
-                    <strong>Produtos cadastrados</strong>
-                    <p>3</p>
+        <main class="conteudo">
+            <header class="cabecalho">
+                <div>
+                    <span class="saudacao">Ola, Alunos de ADS</span>
+                    <h1>Visao geral</h1>
                 </div>
+                <span class="usuario">Administrador</span>
+            </header>
 
-                <div class="cartao">
-                    <strong>Status do sistema</strong>
-                    <p>Em desenvolvimento</p>
-                </div>
+            <section class="resumo">
+                <article class="cartao">
+                    <span>Produtos ativos</span>
+                    <strong>24</strong>
+                    <small>itens cadastrados</small>
+                </article>
+
+                <article class="cartao">
+                    <span>Unidades em estoque</span>
+                    <strong>387</strong>
+                    <small>saldo total disponivel</small>
+                </article>
+
+                <article class="cartao">
+                    <span>Valor em estoque</span>
+                    <strong>R$ 8.450,00</strong>
+                    <small>baseado no preco de custo</small>
+                </article>
+
+                <article class="cartao alerta">
+                    <span>Estoque baixo</span>
+                    <strong>3</strong>
+                    <small>produtos pedindo atencao</small>
+                </article>
+            </section>
+
+            <section class="atalhos">
+                <a class="atalho" href="#">
+                    <strong>Registrar entrada</strong>
+                    <span>Atualizar produtos recebidos</span>
+                </a>
+
+                <a class="atalho" href="#">
+                    <strong>Registrar saida</strong>
+                    <span>Dar baixa no estoque</span>
+                </a>
+
+                <a class="atalho" href="#">
+                    <strong>Novo produto</strong>
+                    <span>Adicionar item ao catalogo</span>
+                </a>
+            </section>
+
+            <div class="grade-paineis">
+                <section class="painel">
+                    <div class="painel-titulo">
+                        <h2>Movimentacoes recentes</h2>
+                        <p>Ultimas operacoes registradas</p>
+                    </div>
+
+                    <div class="tabela-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Tipo</th>
+                                    <th>Quantidade</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Teclado USB</strong><small>Informatica</small></td>
+                                    <td><span class="etiqueta">Entrada</span></td>
+                                    <td>10</td>
+                                    <td>14/08/2026</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mouse sem fio</strong><small>Informatica</small></td>
+                                    <td><span class="etiqueta saida">Saida</span></td>
+                                    <td>2</td>
+                                    <td>13/08/2026</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Papel A4</strong><small>Escritorio</small></td>
+                                    <td><span class="etiqueta">Entrada</span></td>
+                                    <td>20</td>
+                                    <td>12/08/2026</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="painel">
+                    <div class="painel-titulo">
+                        <h2>Reposicao necessaria</h2>
+                        <p>Produtos no limite minimo</p>
+                    </div>
+
+                    <ul class="lista-produtos">
+                        <li>
+                            <span><strong>Mouse sem fio</strong><small>Minimo: 5</small></span>
+                            <b>3 un.</b>
+                        </li>
+                        <li>
+                            <span><strong>Toner preto</strong><small>Minimo: 3</small></span>
+                            <b>2 un.</b>
+                        </li>
+                        <li>
+                            <span><strong>Cabo HDMI</strong><small>Minimo: 5</small></span>
+                            <b>4 un.</b>
+                        </li>
+                    </ul>
+                </section>
             </div>
-        </section>
 
-        <section class="painel">
-            <h2>Produtos</h2>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Categoria</th>
-                        <th>Quantidade</th>
-                        <th>Preço</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                   
-                        <tr>
-                            <td>Nome</td>
-                            <td>categoria</td>
-                            <td>quantidade</td>
-                            <td>10,00 </td>
-                        </tr>
-                  
-                </tbody>
-            </table>
-        </section>
-    </main>
+            <footer class="rodape">
+                Estoque Facil &copy; 2026 - Projeto educacional
+            </footer>
+        </main>
+    </div>
 </body>
 </html>
