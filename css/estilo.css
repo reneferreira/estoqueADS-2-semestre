@@ -1,0 +1,345 @@
+        * {
+            box-sizing: border-box; /* Inclui bordas e preenchimento no tamanho total dos elementos. */
+        }
+
+        :root {
+            --verde-escuro: #15251e; /* Armazena o verde escuro usado no menu e nos atalhos. */
+            --verde: #176b4d; /* Armazena a cor verde principal da interface. */
+            --verde-claro: #e6f3ed; /* Armazena o verde claro usado em destaques. */
+            --fundo: #f4f7f5; /* Armazena a cor de fundo geral da pagina. */
+            --branco: #ffffff; /* Armazena a cor branca usada nos componentes. */
+            --texto: #17221d; /* Armazena a cor principal dos textos. */
+            --texto-claro: #68736d; /* Armazena a cor dos textos secundarios. */
+            --borda: #dce3df; /* Armazena a cor padrao das bordas. */
+            --vermelho: #b33b36; /* Armazena a cor usada em alertas. */
+        }
+
+        body {
+            margin: 0; /* Remove a margem padrao aplicada pelo navegador. */
+            font-family: Arial, Helvetica, sans-serif; /* Define a familia de fontes da pagina. */
+            background-color: var(--fundo); /* Aplica a cor de fundo geral. */
+            color: var(--texto); /* Define a cor principal do texto. */
+        }
+
+        .pagina {
+            min-height: 100vh; /* Garante que a pagina tenha ao menos a altura da tela. */
+        }
+
+        /* Conteudo principal */
+        .conteudo {
+            min-height: 100vh; /* Garante que o conteudo cubra a altura da tela. */
+            margin-left: 240px; /* Reserva espaco para o menu lateral. */
+            padding: 0 34px; /* Adiciona espacamento nas laterais do conteudo. */
+        }
+
+        .cabecalho {
+            height: 96px; /* Define a altura do cabecalho. */
+            display: flex; /* Organiza os elementos do cabecalho lado a lado. */
+            align-items: center; /* Centraliza os elementos verticalmente. */
+            justify-content: space-between; /* Posiciona os elementos nas extremidades. */
+            margin-bottom: 28px; /* Separa o cabecalho do conteudo seguinte. */
+            border-bottom: 1px solid var(--borda); /* Adiciona uma linha abaixo do cabecalho. */
+        }
+
+        .cabecalho h1 {
+            margin: 3px 0 0; /* Adiciona uma pequena margem acima do titulo. */
+            font-size: 25px; /* Define o tamanho do titulo principal. */
+        }
+
+        .saudacao {
+            color: var(--texto-claro); /* Aplica uma cor secundaria a saudacao. */
+            font-size: 12px; /* Define um tamanho menor para a saudacao. */
+        }
+
+        .usuario {
+            padding: 9px 12px; /* Cria espacamento interno no identificador do usuario. */
+            border: 1px solid var(--borda); /* Adiciona uma borda ao identificador. */
+            border-radius: 6px; /* Arredonda os cantos do identificador. */
+            background-color: var(--branco); /* Aplica fundo branco ao identificador. */
+            font-size: 12px; /* Define o tamanho do nome do usuario. */
+            font-weight: bold; /* Exibe o nome do usuario em negrito. */
+        }
+
+        /* Cartoes de resumo */
+        .resumo {
+            display: grid; /* Organiza os cartoes em uma grade. */
+            grid-template-columns: repeat(4, 1fr); /* Cria quatro colunas de mesma largura. */
+            gap: 16px; /* Define a distancia entre os cartoes. */
+            margin-bottom: 18px; /* Separa o resumo da secao seguinte. */
+        }
+
+        .cartao {
+            padding: 20px; /* Cria espacamento interno no cartao. */
+            border: 1px solid var(--borda); /* Adiciona uma borda ao redor do cartao. */
+            border-top: 3px solid var(--verde); /* Destaca o topo do cartao em verde. */
+            border-radius: 7px; /* Arredonda os cantos do cartao. */
+            background-color: var(--branco); /* Aplica fundo branco ao cartao. */
+        }
+
+        .cartao.alerta {
+            border-top-color: #b66a16; /* Altera a borda superior para indicar alerta. */
+        }
+
+        .cartao span,
+        .cartao small {
+            display: block; /* Faz cada texto ocupar uma linha propria. */
+            color: var(--texto-claro); /* Aplica uma cor secundaria aos textos. */
+        }
+
+        .cartao strong {
+            display: block; /* Faz o valor ocupar uma linha propria. */
+            margin: 10px 0 5px; /* Separa o valor dos textos ao redor. */
+            font-size: 25px; /* Destaca o valor com fonte maior. */
+        }
+
+        .cartao small {
+            font-size: 11px; /* Define um tamanho pequeno para a descricao. */
+        }
+
+        /* Atalhos */
+        .atalhos {
+            display: grid; /* Organiza os atalhos em uma grade. */
+            grid-template-columns: repeat(3, 1fr); /* Cria tres colunas de mesma largura. */
+            gap: 16px; /* Define a distancia entre os atalhos. */
+            margin-bottom: 22px; /* Separa os atalhos dos paineis. */
+        }
+
+        .atalho {
+            padding: 17px 20px; /* Cria espacamento interno no atalho. */
+            border-radius: 7px; /* Arredonda os cantos do atalho. */
+            background-color: var(--verde-escuro); /* Aplica fundo verde escuro ao atalho. */
+            color: var(--branco); /* Define a cor branca para o texto. */
+            text-decoration: none; /* Remove o sublinhado do link. */
+        }
+
+        .atalho span {
+            display: block; /* Faz a descricao ocupar uma linha propria. */
+            margin-top: 5px; /* Separa a descricao do titulo do atalho. */
+            color: #a9b8b0; /* Aplica uma cor suave a descricao. */
+            font-size: 12px; /* Define um tamanho menor para a descricao. */
+        }
+
+        /* Paineis inferiores */
+        .grade-paineis {
+            display: grid; /* Organiza os paineis inferiores em uma grade. */
+            grid-template-columns: 2fr 1fr; /* Deixa o primeiro painel duas vezes mais largo. */
+            gap: 18px; /* Define a distancia entre os paineis. */
+        }
+
+        .painel {
+            overflow: hidden; /* Oculta conteudo que ultrapasse os cantos do painel. */
+            border: 1px solid var(--borda); /* Adiciona uma borda ao painel. */
+            border-radius: 7px; /* Arredonda os cantos do painel. */
+            background-color: var(--branco); /* Aplica fundo branco ao painel. */
+            box-shadow: 0 2px 10px rgba(23, 34, 29, 0.07); /* Adiciona uma sombra suave ao painel. */
+        }
+
+        .painel-titulo {
+            padding: 19px 20px; /* Cria espacamento interno no cabecalho do painel. */
+            border-bottom: 1px solid var(--borda); /* Separa o titulo do conteudo do painel. */
+        }
+
+        .painel-titulo h2 {
+            margin: 0; /* Remove a margem padrao do titulo. */
+            font-size: 16px; /* Define o tamanho do titulo do painel. */
+        }
+
+        .painel-titulo p {
+            margin: 5px 0 0; /* Adiciona espaco acima da descricao. */
+            color: var(--texto-claro); /* Aplica cor secundaria a descricao. */
+            font-size: 12px; /* Define um tamanho menor para a descricao. */
+        }
+
+        .tabela-container {
+            overflow-x: auto; /* Permite rolagem horizontal quando necessario. */
+        }
+
+        table {
+            width: 100%; /* Faz a tabela ocupar toda a largura do painel. */
+            min-width: 620px; /* Evita que a tabela fique estreita demais. */
+            border-collapse: collapse; /* Une as bordas das celulas adjacentes. */
+        }
+
+        th,
+        td {
+            padding: 14px 18px; /* Cria espacamento interno nas celulas. */
+            border-bottom: 1px solid #edf0ee; /* Separa visualmente as linhas da tabela. */
+            text-align: left; /* Alinha o conteudo das celulas a esquerda. */
+        }
+
+        th {
+            background-color: #fafbfa; /* Aplica um fundo suave ao cabecalho da tabela. */
+            color: var(--texto-claro); /* Aplica cor secundaria aos titulos. */
+            font-size: 11px; /* Define um tamanho pequeno para os titulos. */
+            text-transform: uppercase; /* Exibe os titulos em letras maiusculas. */
+        }
+
+        td small {
+            display: block; /* Faz o texto auxiliar ocupar uma linha propria. */
+            margin-top: 4px; /* Separa o texto auxiliar do texto principal. */
+            color: var(--texto-claro); /* Aplica cor secundaria ao texto auxiliar. */
+            font-size: 11px; /* Reduz o tamanho do texto auxiliar. */
+        }
+
+        .etiqueta {
+            display: inline-block; /* Permite dimensionar a etiqueta mantendo-a na linha. */
+            padding: 5px 8px; /* Cria espacamento interno na etiqueta. */
+            border-radius: 4px; /* Arredonda os cantos da etiqueta. */
+            background-color: var(--verde-claro); /* Aplica fundo verde claro a etiqueta. */
+            color: var(--verde); /* Define a cor verde para o texto. */
+            font-size: 11px; /* Define um tamanho pequeno para o texto. */
+            font-weight: bold; /* Exibe o texto da etiqueta em negrito. */
+        }
+
+        .etiqueta.saida {
+            background-color: #f9e7e5; /* Aplica fundo avermelhado a etiqueta de saida. */
+            color: #982f2b; /* Define texto vermelho para indicar saida. */
+        }
+
+        .lista-produtos {
+            margin: 0; /* Remove a margem padrao da lista. */
+            padding: 0; /* Remove o preenchimento padrao da lista. */
+            list-style: none; /* Remove os marcadores dos itens. */
+        }
+
+        .lista-produtos li {
+            display: flex; /* Organiza as informacoes do produto lado a lado. */
+            align-items: center; /* Centraliza verticalmente o conteudo do item. */
+            justify-content: space-between; /* Separa o nome e a quantidade nas extremidades. */
+            padding: 15px 20px; /* Cria espacamento interno no item. */
+            border-bottom: 1px solid #edf0ee; /* Separa visualmente os itens da lista. */
+        }
+
+        .lista-produtos small {
+            display: block; /* Faz a informacao secundaria ocupar uma linha propria. */
+            margin-top: 4px; /* Separa a informacao secundaria do nome. */
+            color: var(--texto-claro); /* Aplica cor secundaria a informacao. */
+        }
+
+        .lista-produtos b {
+            color: var(--vermelho); /* Destaca em vermelho a quantidade baixa. */
+        }
+
+        .rodape {
+            padding: 36px 0 24px; /* Cria espacamento vertical no rodape. */
+            color: #8a948f; /* Aplica uma cor discreta ao texto do rodape. */
+            font-size: 12px; /* Define um tamanho pequeno para o texto. */
+            text-align: center; /* Centraliza o texto do rodape. */
+        }
+
+        /* Ajustes para telas menores */
+        @media (max-width: 1000px) {
+            .resumo {
+                grid-template-columns: 1fr 1fr; /* Reduz o resumo para duas colunas. */
+            }
+
+            .grade-paineis {
+                grid-template-columns: 1fr; /* Empilha os paineis em uma unica coluna. */
+            }
+        }
+
+        @media (max-width: 700px) {
+            .conteudo {
+                margin-left: 0; /* Remove o espaco reservado ao menu lateral. */
+                padding: 0 16px; /* Reduz o espacamento lateral do conteudo. */
+            }
+
+            .resumo,
+            .atalhos {
+                grid-template-columns: 1fr; /* Empilha os elementos em uma unica coluna. */
+            }
+        }
+
+           /* Estilos exclusivos do menu lateral */
+    .menu-lateral {
+        position: fixed; /* Mantem o menu fixo na tela durante a rolagem. */
+        top: 0; /* Alinha o menu ao topo da tela. */
+        bottom: 0; /* Estende o menu ate a parte inferior da tela. */
+        left: 0; /* Alinha o menu ao lado esquerdo da tela. */
+        width: 240px; /* Define a largura do menu lateral. */
+        padding: 24px 16px; /* Cria espacamento interno vertical e horizontal. */
+        display: flex; /* Organiza os elementos com o modelo flexivel. */
+        flex-direction: column; /* Distribui os elementos em uma coluna. */
+        background-color: var(--verde-escuro); /* Aplica a cor verde escura ao fundo. */
+        color: var(--branco); /* Define a cor branca como cor padrao do texto. */
+    }
+
+    .marca {
+        display: flex; /* Organiza o icone e o texto lado a lado. */
+        align-items: center; /* Centraliza verticalmente os itens da marca. */
+        gap: 11px; /* Define a distancia entre o icone e o texto. */
+        margin-bottom: 25px; /* Separa a marca dos links do menu. */
+        padding: 0 8px; /* Adiciona espacamento interno apenas nas laterais. */
+        color: var(--branco); /* Define a cor branca para o texto da marca. */
+        text-decoration: none; /* Remove o sublinhado do link. */
+        font-size: 17px; /* Define o tamanho do texto principal da marca. */
+        font-weight: bold; /* Exibe o texto da marca em negrito. */
+    }
+
+    .marca-icone {
+        width: 38px; /* Define a largura do icone. */
+        height: 38px; /* Define a altura do icone. */
+        display: grid; /* Usa o modelo de grade para posicionar o conteudo. */
+        place-items: center; /* Centraliza o conteudo nos dois eixos. */
+        border-radius: 6px; /* Arredonda os cantos do icone. */
+        background-color: #3da477; /* Aplica o fundo verde ao icone. */
+    }
+
+    .marca small {
+        display: block; /* Faz o texto secundario ocupar uma linha propria. */
+        margin-top: 3px; /* Separa o texto secundario do texto principal. */
+        color: #93a49c; /* Aplica uma cor mais discreta ao texto secundario. */
+        font-size: 11px; /* Reduz o tamanho do texto secundario. */
+        font-weight: normal; /* Remove o negrito herdado da marca. */
+    }
+
+    .menu-lateral nav {
+        display: flex; /* Ativa o modelo flexivel para a navegacao. */
+        flex-direction: column; /* Organiza os links verticalmente. */
+        gap: 3px; /* Cria uma pequena distancia entre os links. */
+    }
+
+    .menu-lateral nav a,
+    .sair {
+        padding: 11px 12px; /* Define o espacamento interno dos links. */
+        border-radius: 6px; /* Arredonda os cantos dos links. */
+        color: #d5dfda; /* Define uma cor clara para o texto. */
+        text-decoration: none; /* Remove o sublinhado dos links. */
+    }
+
+    .menu-lateral nav a:hover,
+    .menu-lateral nav a.ativo {
+        background-color: #243a30; /* Destaca o link ativo ou sob o cursor. */
+        color: var(--branco); /* Clareia o texto do link destacado. */
+    }
+
+    .titulo-menu {
+        margin: 18px 12px 4px; /* Define o espacamento externo do titulo. */
+        color: #758b80; /* Usa uma cor discreta no titulo da secao. */
+        font-size: 10px; /* Define um tamanho pequeno para o titulo. */
+        font-weight: bold; /* Exibe o titulo em negrito. */
+        text-transform: uppercase; /* Converte o texto para letras maiusculas. */
+    }
+
+    .sair {
+        margin-top: auto; /* Empurra o link de saida para o fim do menu. */
+        border-top: 1px solid #2d4037; /* Adiciona uma linha separadora acima do link. */
+        border-radius: 0; /* Remove o arredondamento do link de saida. */
+    }
+
+    @media (max-width: 700px) {
+        .menu-lateral {
+            position: static; /* Recoloca o menu no fluxo normal da pagina. */
+            width: 100%; /* Faz o menu ocupar toda a largura disponivel. */
+        }
+
+        .menu-lateral nav {
+            display: grid; /* Organiza os links em uma grade. */
+            grid-template-columns: 1fr 1fr; /* Cria duas colunas de mesma largura. */
+        }
+
+        .titulo-menu,
+        .sair {
+            display: none; /* Oculta os elementos em telas pequenas. */
+        }
+    }
