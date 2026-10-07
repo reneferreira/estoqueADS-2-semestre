@@ -11,7 +11,7 @@
 
                 <span class="titulo-menu">Catálogo</span>
                 <a class="<?= $paginaAtual === "produtos.php" ? "ativo" : "" ?>" href="produtos.php">Produtos</a>
-                <a href="#">Categorias</a>
+                <a class="<?= $paginaAtual === "categorias.php" ? "ativo" : "" ?>" href="categorias.php">Categorias</a>
 
                 <span class="titulo-menu">Operacoes</span>
                 <a href="#">Nova entrada</a>
