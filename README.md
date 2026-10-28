@@ -139,3 +139,26 @@ Se o Apache estiver configurado em outra porta, como 8080, use `http://localhost
 4. Clique em **Exportar/Executar** e guarde o arquivo baixado como uma cópia do seu progresso.
 
 Os arquivos PHP e CSS são o código da aplicação; os cadastros ficam no banco. Para levar o projeto para outro computador, copie o código e exporte/importe também o banco.
+
+## 9. Editar e excluir produtos com PDO
+
+As duas páginas (`produtos.php` e `produto.php`) permitem cadastrar, listar, editar e excluir.
+
+1. Clique em **Editar** na linha de um produto. O ID vai na URL (`?editar=1`) e um `SELECT` preparado busca os dados para preencher o formulário.
+2. Altere os campos e clique em **Salvar alterações**. O formulário envia por POST a ação `editar`, o ID e os campos. Após a validação, `UPDATE produtos SET ... WHERE id = :id` salva os dados. **Cancelar edição** retorna ao cadastro sem salvar.
+3. Clique em **Excluir** e confirme no navegador. Um formulário separado envia a ação `excluir`, o ID e o token CSRF por POST. `DELETE FROM produtos WHERE id = :id` remove somente o registro escolhido. A exclusão é definitiva.
+
+Em aula, observe a sequência: **receber → validar → preparar SQL → executar → redirecionar**. O `prepare()` separa o comando SQL dos valores enviados por `execute()`. O `WHERE` limita a atualização/exclusão ao ID escolhido; nunca o retire dessas consultas. O token CSRF protege os formulários e `htmlspecialchars()` protege os valores exibidos no HTML. Após salvar ou excluir, o redirecionamento evita repetir a operação ao atualizar a página.
+
+Para conferir: edite um produto de teste, atualize a página e confirme a persistência; cancele uma edição; cancele uma exclusão e confira que o registro permanece; depois confirme a exclusão do produto de teste. Teste também um ID inexistente e campos inválidos.
+
+## 10. CRUD em arquivos separados
+
+- `inserir.php`: recebe o cadastro por POST e executa INSERT.
+- `listar.php`: executa SELECT e pode ser aberto no navegador para ver a listagem.
+- `editar.php`: busca o produto por GET e executa UPDATE quando o formulário é enviado por POST.
+- `deletar.php`: recebe a exclusão por POST e executa DELETE, validando o token CSRF.
+- `validar-produto.php`: valida os campos usados por inserir e editar.
+- `contexto-produtos.php`: inicia a sessão, prepara as variáveis, conecta ao banco e carrega a operação solicitada.
+
+`produto.php` e `produtos.php` mantêm a apresentação. Seus formulários enviam para os arquivos de cada operação. O campo `origem` permite voltar para a versão da tela utilizada. Ao estudar, acompanhe: formulário → arquivo da operação → validação → PDO → redirecionamento. O campo `acao` antigo não define mais a operação: agora quem a define é o arquivo de destino do formulário.
